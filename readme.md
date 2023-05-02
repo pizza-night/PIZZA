@@ -13,3 +13,15 @@ PIZZA is a Peer-2-Peer message protocol
 | Type   | Size | Payload       |
 |--------|------|---------------|
 | 0      | u32  | sizeof(size)  |
+
+#### Set Username
+| Type   | Size | Username      |
+|--------|------|---------------|
+| 1      | u8   | sizeof(size)  |
+
+#### Peer Sharing
+This should be the first message sent when a peer connects to you
+
+| Type   | IpV4 Count   | IpV6 Count    | IpV4                      | IpV6                      |
+|--------|--------------|---------------|---------------------------|---------------------------|
+| 2      | u8           | u8            | sizeof(u32)*IpV4 Count    | sizeof(u128)*IpV6 Count   |
