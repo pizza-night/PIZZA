@@ -10,7 +10,6 @@ PIZZA is a Peer-2-Peer message protocol
 
 ### Message Type
 #### Data
-| Header | Payload              |
-|--------|----------------------|
 | Type   | Size | Payload       |
+|--------|------|---------------|
 | 0      | u32  | sizeof(size)  |
