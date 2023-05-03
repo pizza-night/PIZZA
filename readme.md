@@ -3,25 +3,34 @@
 PIZZA is a Peer-2-Peer message protocol
 
 ## Message Format
-| Header | Payload          |
-|--------|------------------|
-| Type   | Type Dependent   |
-| u8     |                  |
+| **Desc** | Type | Payload        |
+| ---      | ---  | ---            |
+| **Size** | u8   | Type Dependent |
 
-### Message Type
-#### Data
-| Type   | Size | Payload       |
-|--------|------|---------------|
-| 0      | u32  | sizeof(size)  |
+### Message Types
+
+#### Text Message
+
+**Type: 0:**
+
+| **Desc** | the length of the payload | the text message in utf8 encoding |
+| ---      | ---                       | ---                               |
+| **Size** | u32                       | sizeof(size)                      |
 
 #### Set Username
-| Type   | Size | Username      |
-|--------|------|---------------|
-| 1      | u8   | sizeof(size)  |
+
+**Type 1:**
+
+| **Desc** | the length of the name | the name in utf8 encoding |
+| ---      | ---                    | ---                       |
+| **Size** | u8                     | sizeof(size)              |
 
 #### Peer Sharing
-This should be the first message sent when a peer connects to you
 
-| Type   | IpV4 Count   | IpV6 Count    | IpV4                      | IpV6                      |
-|--------|--------------|---------------|---------------------------|---------------------------|
-| 2      | u8           | u8            | sizeof(u32)*IpV4 Count    | sizeof(u128)*IpV6 Count   |
+This should be sent to all peers that connect to you
+
+**Type 2:**
+
+| **Desc** | the # of ipv4 peers | the # of ipv6 peers | a list of ipv4 addresses | a list of ipv6 addresses |
+| ---      | ---                 | ---                 | ---                      | ---                      |
+| **Size** | u8                  | u8                  | sizeof(u32)*IpV4 Count   | sizeof(u128)*IpV6 Count  |
